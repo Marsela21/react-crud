@@ -6,6 +6,7 @@ const FakultasList = React.lazy( () => import("./components/Fakultas/List") );
 const ProdiList = React.lazy( () => import("./components/Prodi/List") );
 const MahasiswaList = React.lazy( () => import("./components/Mahasiswa/List") );
 const FakultasCreate = React.lazy(() => import("./components/Fakultas/Create"));
+const FakultasEdit = React.lazy(() => import("./components/Fakultas/Edit"));
 const MahasiswaCreate = React.lazy(() => import("./components/Mahasiswa/Create"));
 const ProdiCreate = React.lazy(() => import("./components/Prodi/Create"));
 
@@ -48,6 +49,14 @@ function App() {
               element={
                 // <ProtectedRoute>
                   <FakultasCreate />
+                // </ProtectedRoute>
+              }             
+            />
+        <Route
+              path="/fakultas/edit/:id"
+              element={
+                // <ProtectedRoute>
+                  <FakultasEdit/>
                 // </ProtectedRoute>
               }             
             />
