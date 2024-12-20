@@ -7,16 +7,20 @@ export default function Edit() {
   const { id } = useParams();  // Mengambil parameter "id" dari URL menggunakan useParams
   const navigate = useNavigate();  // Menggunakan useNavigate untuk navigasi setelah proses selesai
   const [nama, setNama] = useState("");  // Menginisialisasi state 'nama' untuk menyimpan nama fakultas
-  const [dekan, setDekan] = useState("");
-  const [singkatan, setSingkatan] = useState("");
+  const [singkatan, setSingkatan] = useState("");  // Menginisialisasi state 'nama' untuk menyimpan nama fakultas
+  const [dekan, setDekan] = useState("");  // Menginisialisasi state 'nama' untuk menyimpan nama fakultas
+
   const [error, setError] = useState(null);  // Menginisialisasi state 'error' untuk menyimpan pesan error jika ada
 
   // Mengambil data fakultas berdasarkan id ketika komponen pertama kali dimuat
   useEffect(() => {
     axios
-      .get(`https://academic-mi5a.vercel.app/api/api/fakultas/${id}`)  // Mengirimkan request GET untuk mendapatkan data fakultas berdasarkan ID
+      .get(`https://academic-mi5a.vercel.app/api/api/fakultas/${id}`) // Mengirimkan request GET untuk mendapatkan data fakultas berdasarkan ID
       .then((response) => {
-        setNama(response.data.result.nama);  // Jika sukses, mengisi state 'nama' dengan nama fakultas dari response
+        setNama(response.data.result.nama);  // Jika sukses, mengisi state 'nama' dengan nama fakultas dari 
+        setDekan(response.data.result.dekan);  // Jika sukses, mengisi state 'nama' dengan nama fakultas dari response
+        setSingkatan(response.data.result.singkatan);  // Jika sukses, mengisi state 'nama' dengan nama fakultas dari response
+
       })
       .catch((error) => {
         console.error("Error fetching data:", error);  // Menampilkan pesan error di console jika request gagal
@@ -27,19 +31,22 @@ export default function Edit() {
   // Menghandle perubahan input saat pengguna mengetik di form
   const handleChange = (e) => {
     setNama(e.target.value);  // Mengubah state 'nama' sesuai dengan nilai input yang diisi pengguna
+
   };
   const handleChangeDekan = (e) => {
     setDekan(e.target.value);  // Mengubah state 'nama' sesuai dengan nilai input yang diisi pengguna
+
   };
   const handleChangeSingkatan = (e) => {
     setSingkatan(e.target.value);  // Mengubah state 'nama' sesuai dengan nilai input yang diisi pengguna
+
   };
 
   // Menghandle submit form untuk mengedit data fakultas
   const handleSubmit = (e) => {
     e.preventDefault();  // Mencegah reload halaman saat form disubmit
     axios
-      .patch(`hhttps://academic-mi5a.vercel.app/api/api/fakultas/${id}`, { nama })  // Mengirimkan request PATCH untuk mengupdate data fakultas berdasarkan ID
+      .put(`https://academic-mi5a.vercel.app/api/api/fakultas/${id}`, { nama, dekan, singkatan })  // Mengirimkan request PATCH untuk mengupdate data fakultas berdasarkan ID
       .then((response) => {
         navigate("/fakultas");  // Jika update berhasil, navigasi kembali ke halaman list fakultas
       })
@@ -66,24 +73,24 @@ export default function Edit() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="nama" className="form-label">Nama Fakultas</label>  {/* Label untuk input nama */}
-          <input
-            type="text"
-            className="form-control"
-            id="dekan"
-            value={dekan}  // Mengisi nilai input dengan state 'nama'
-            onChange={handleChange}  // Mengubah nilai input saat ada perubahan (user mengetik)
-            required  // Input wajib diisi
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="nama" className="form-label">Nama Fakultas</label>  {/* Label untuk input nama */}
+          <label htmlFor="singkatan" className="form-label">singkatan</label>  {/* Label untuk input nama */}
           <input
             type="text"
             className="form-control"
             id="singkatan"
             value={singkatan}  // Mengisi nilai input dengan state 'nama'
-            onChange={handleChange}  // Mengubah nilai input saat ada perubahan (user mengetik)
+            onChange={handleChangeSingkatan}  // Mengubah nilai input saat ada perubahan (user mengetik)
+            required  // Input wajib diisi
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="dekan" className="form-label">Dekan</label>  {/* Label untuk input nama */}
+          <input
+            type="text"
+            className="form-control"
+            id="dekan"
+            value={dekan}  // Mengisi nilai input dengan state 'nama'
+            onChange={handleChangeDekan}  // Mengubah nilai input saat ada perubahan (user mengetik)
             required  // Input wajib diisi
           />
         </div>

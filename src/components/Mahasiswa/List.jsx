@@ -74,12 +74,18 @@ export default function List(){
                     <td>{data.alamat}</td>
                     <td>{data.prodi.nama}</td>
                     <td>{data.prodi.fakultas.nama}</td>
-                    <NavLink>
-                        <button onClick={() => handleDelete(data.id, data.nama)}
-                             className="btn btn-danger"> 
-                            Delete
+                    <td>
+                    <NavLink
+                    to={`/mahasiswa/edit/${data.id}`}
+                    className="btn btn-warning"
+                    >
+                        Edit
+                    </NavLink>  
+                        <button onClick={() => handleDelete(data.id, data.nama, data.dekan, data.singkatan)}
+                        className="btn btn-danger"> 
+                        Delete  
                         </button>
-                    </NavLink>
+                        </td>  
                         </tr>
                     ) )}
                 </tbody>

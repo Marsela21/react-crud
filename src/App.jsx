@@ -8,7 +8,9 @@ const MahasiswaList = React.lazy( () => import("./components/Mahasiswa/List") );
 const FakultasCreate = React.lazy(() => import("./components/Fakultas/Create"));
 const FakultasEdit = React.lazy(() => import("./components/Fakultas/Edit"));
 const MahasiswaCreate = React.lazy(() => import("./components/Mahasiswa/Create"));
+const MahasiswaEdit = React.lazy(() => import("./components/Mahasiswa/Edit"));
 const ProdiCreate = React.lazy(() => import("./components/Prodi/Create"));
+const ProdiEdit = React.lazy(() => import("./components/Prodi/Edit"));
 
 function App() {
  
@@ -71,7 +73,13 @@ function App() {
               element={
                   <MahasiswaCreate />
               }
-            />             
+            /> 
+            <Route
+              path="/prodi/edit/:id"
+              element={
+                  <ProdiEdit />
+              }
+            />            
       </Routes>
     </Router >
   )

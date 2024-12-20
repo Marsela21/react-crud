@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react"
 import axios from "axios"
-import { NavLink } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import Swal from "sweetalert2"; // Import SweetAlert2
 
 export default function List(){
@@ -68,15 +68,13 @@ export default function List(){
                             <td>{data.dekan}</td>
                             <td>{data.singkatan}</td>
                             <td>
-
-        
                     <NavLink
                     to={`/fakultas/edit/${data.id}`}
                     className="btn btn-warning"
                     >
                         Edit
                     </NavLink>  
-                        <button onClick={() => handleDelete(data.id, data.nama)}
+                        <button onClick={() => handleDelete(data.id, data.nama, data.dekan, data.singkatan)}
                         className="btn btn-danger"> 
                         Delete  
                         </button>
